@@ -1,5 +1,6 @@
 package com.project.reactor.utils;
 
+import java.util.Collections;
 import java.util.List;
 
 import com.project.reactor.domain.Child;
@@ -26,6 +27,10 @@ public class Mocks {
                     .name("Roberto")
                     .build()))
             .build());
+  }
+
+  public static List<Parent> buildParentEmpty() {
+    return Collections.emptyList();
   }
 
   public static List<String> buildColors() {
