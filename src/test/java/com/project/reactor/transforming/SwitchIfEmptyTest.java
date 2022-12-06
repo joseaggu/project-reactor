@@ -1,9 +1,9 @@
-package com.project.reactor;
+package com.project.reactor.transforming;
 
 import java.util.List;
 
-import com.project.reactor.domain.Parent;
 import com.project.reactor.utils.Mocks;
+import com.project.reactor.utils.domain.Parent;
 import org.junit.jupiter.api.Test;
 import reactor.core.publisher.Flux;
 import reactor.test.StepVerifier;

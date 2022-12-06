@@ -1,4 +1,4 @@
-package com.project.reactor.domain;
+package com.project.reactor.utils.domain;
 
 import java.util.List;
 

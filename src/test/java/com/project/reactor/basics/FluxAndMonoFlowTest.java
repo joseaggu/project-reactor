@@ -1,4 +1,4 @@
-package com.project.reactor;
+package com.project.reactor.basics;
 
 import com.project.reactor.utils.Mocks;
 import org.junit.jupiter.api.Test;

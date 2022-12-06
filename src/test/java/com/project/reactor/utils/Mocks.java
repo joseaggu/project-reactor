@@ -3,8 +3,8 @@ package com.project.reactor.utils;
 import java.util.Collections;
 import java.util.List;
 
-import com.project.reactor.domain.Child;
-import com.project.reactor.domain.Parent;
+import com.project.reactor.utils.domain.Child;
+import com.project.reactor.utils.domain.Parent;
 
 public class Mocks {
 

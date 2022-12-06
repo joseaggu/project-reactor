@@ -1,4 +1,4 @@
-package com.project.reactor;
+package com.project.reactor.transforming;
 
 import com.project.reactor.utils.Mocks;
 import org.junit.jupiter.api.Test;
@@ -6,16 +6,19 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
+/**
+ * Map operator it's used to transforme one element to other
+ */
 class MapTest {
 
   @Test
   void fluxMap() {
     //given
-    var fluxMethod = Flux.fromIterable(Mocks.buildColors()).log();
+    var fluxMethod = Flux.fromIterable(Mocks.buildColors());
 
     //when
     var actual = fluxMethod
-        .map(String::toUpperCase);
+        .map(String::toUpperCase).log();
 
     //then
     StepVerifier.create(actual)

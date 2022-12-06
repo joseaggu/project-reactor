@@ -1,4 +1,4 @@
-package com.project.reactor.domain;
+package com.project.reactor.utils.domain;
 
 import lombok.Builder;
 import lombok.Getter;

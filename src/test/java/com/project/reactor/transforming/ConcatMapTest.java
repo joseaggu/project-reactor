@@ -1,18 +1,21 @@
-package com.project.reactor;
+package com.project.reactor.transforming;
 
 import java.time.Duration;
 import java.util.Random;
 
-import com.project.reactor.domain.Child;
 import com.project.reactor.utils.Mocks;
+import com.project.reactor.utils.domain.Child;
 import org.junit.jupiter.api.Test;
 import reactor.core.publisher.Flux;
 import reactor.test.StepVerifier;
 
+/**
+ * Works similar to flatmap, the difference it's concatMap preserver the ordering
+ */
 class ConcatMapTest {
 
   @Test
-  void contactMap() {
+  void concatMap() {
     //given
     var data = Mocks.buildParent();
 
