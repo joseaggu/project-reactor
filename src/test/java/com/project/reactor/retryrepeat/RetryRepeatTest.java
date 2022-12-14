@@ -9,6 +9,11 @@ import reactor.core.publisher.Flux;
 import reactor.test.StepVerifier;
 import reactor.util.retry.Retry;
 
+/**
+ * <p>
+ * <img class="marble" src="img.png" alt="">
+ * <p>
+ */
 @Slf4j
 class RetryRepeatTest {
 
