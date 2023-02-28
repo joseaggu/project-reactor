@@ -13,8 +13,8 @@ class DefaultEmptyTest {
   @Test
   void defaultEmpty() {
     //when
-    final var build = Parent.builder().name("default").build();
-    final var actual = Flux.empty().defaultIfEmpty(build).log();
+    final Parent build = Parent.builder().name("default").build();
+    final Flux<Object> actual = Flux.empty().defaultIfEmpty(build).log();
 
     //then
     StepVerifier.create(actual)

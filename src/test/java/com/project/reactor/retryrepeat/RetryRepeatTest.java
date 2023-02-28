@@ -8,6 +8,7 @@ import reactor.core.Exceptions;
 import reactor.core.publisher.Flux;
 import reactor.test.StepVerifier;
 import reactor.util.retry.Retry;
+import reactor.util.retry.RetryBackoffSpec;
 
 /**
  * <p>
@@ -21,7 +22,7 @@ class RetryRepeatTest {
   void retryForEver_dangerTest() {
 
     //when
-    var value = Flux.just("a", "b")
+    Flux<Object> value = Flux.just("a", "b")
         .map(it -> {
           log.error("Retry for ever");
           throw new IllegalArgumentException();
@@ -40,7 +41,7 @@ class RetryRepeatTest {
   void retryXTimesTest() {
 
     //when
-    var value = Flux.just("a", "b")
+    Flux<Object> value = Flux.just("a", "b")
         .map(it -> {
           log.error("Retry x times");
           throw new IllegalArgumentException();
@@ -57,15 +58,15 @@ class RetryRepeatTest {
 
   @Test
   void retryWhenIfItsIllegalArgumentExceptionTest() {
-    var maxAttempts = 8;
-    var fixedDelay = Duration.ofMillis(500);
-    var retryWhen = Retry.fixedDelay(maxAttempts, fixedDelay)
+    int maxAttempts = 8;
+    Duration fixedDelay = Duration.ofMillis(500);
+    RetryBackoffSpec retryWhen = Retry.fixedDelay(maxAttempts, fixedDelay)
         .filter(ex -> ex instanceof IllegalArgumentException) // when its this exception retry
         .onRetryExhaustedThrow(
             (retryBackoffSpec, retrySignal) -> Exceptions.propagate(retrySignal.failure())); // Propagate  same exception
 
     //when
-    var value = Flux.just("a", "b")
+    Flux<Object> value = Flux.just("a", "b")
         .map(it -> {
           log.error("Retry X times");
           throw new IllegalStateException("RuntimeException");
@@ -85,7 +86,7 @@ class RetryRepeatTest {
   void repeat() {
 
     //when
-    var value = Flux.just("a")
+    Flux<String> value = Flux.just("a")
         .map(it -> {
           log.error("Repeat X times");
           return it;

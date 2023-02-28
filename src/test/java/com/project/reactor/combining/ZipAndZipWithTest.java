@@ -1,6 +1,7 @@
 package com.project.reactor.combining;
 
 import com.project.reactor.utils.Mocks;
+import com.project.reactor.utils.domain.Parent;
 import org.junit.jupiter.api.Test;
 import reactor.core.publisher.Flux;
 import reactor.test.StepVerifier;
@@ -13,11 +14,11 @@ class ZipAndZipWithTest {
   @Test
   void zip() {
     //given
-    var dataOne = Flux.just("a", "b");
-    var dataTwo = Flux.just("1", "2");
+    Flux<String> dataOne = Flux.just("a", "b");
+    Flux<String> dataTwo = Flux.just("1", "2");
 
     //when
-    var actual = Flux.zip(dataOne, dataTwo, (first, second) -> first + second)
+    Flux<String> actual = Flux.zip(dataOne, dataTwo, (first, second) -> first + second)
         .log();
 
     //then
@@ -29,11 +30,11 @@ class ZipAndZipWithTest {
   @Test
   void zipWith() {
     //given
-    var dataOne = Flux.just("a", "b");
-    var dataTwo = Flux.just("1", "2");
+    Flux<String> dataOne = Flux.just("a", "b");
+    Flux<String> dataTwo = Flux.just("1", "2");
 
     //when
-    var actual = dataOne.zipWith(dataTwo, (first, second) -> first + second)
+    Flux<String> actual = dataOne.zipWith(dataTwo, (first, second) -> first + second)
         .log();
 
     //then
@@ -45,11 +46,11 @@ class ZipAndZipWithTest {
   @Test
   void zipWithOther() {
     //given
-    var dataOne = Flux.fromIterable(Mocks.buildParent());
-    var dataTwo = Flux.fromIterable(Mocks.buildParent());
+    Flux<Parent> dataOne = Flux.fromIterable(Mocks.buildParent());
+    Flux<Parent> dataTwo = Flux.fromIterable(Mocks.buildParent());
 
     //when
-    var actual =
+    Flux<String> actual =
         dataOne.zipWith(dataTwo, (first, second) -> first.getName().toUpperCase().concat("_").concat(second.getName().toLowerCase()))
             .log();
 

@@ -9,7 +9,7 @@ class exceptionFlowTest {
   @Test
   void expectError() {
     //when
-    var fluxError = Flux.just("a", "b", "c")
+    Flux<String> fluxError = Flux.just("a", "b", "c")
         .mergeWith(Flux.error(new RuntimeException("Error Test")));
 
     //then
@@ -23,7 +23,7 @@ class exceptionFlowTest {
   @Test
   void expectErrorWithClass() {
     //when
-    var fluxError = Flux.just("a", "b", "c")
+    Flux<String> fluxError = Flux.just("a", "b", "c")
         .mergeWith(Flux.error(new RuntimeException("Error Test")));
 
     //then
@@ -37,7 +37,7 @@ class exceptionFlowTest {
   @Test
   void expectErrorWithMessage() {
     //when
-    var fluxError = Flux.just("a", "b", "c")
+    Flux<String> fluxError = Flux.just("a", "b", "c")
         .mergeWith(Flux.error(new RuntimeException("Error Test")));
     //then
     StepVerifier.create(fluxError)

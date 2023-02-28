@@ -1,6 +1,9 @@
 package com.project.reactor;
 
+import java.util.List;
+
 import com.project.reactor.utils.Mocks;
+import com.project.reactor.utils.domain.Parent;
 import org.junit.jupiter.api.Test;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
@@ -11,10 +14,10 @@ class MonoLikeFluxBehaviorTest {
   void monoLikeFluxBehavior() {
     //given
 
-    var data = Mocks.buildParent();
+    List<Parent> data = Mocks.buildParent();
 
     //when
-    var actual = Mono.just(data)
+    Mono<List<Parent>> actual = Mono.just(data)
         .log();
 
     //then

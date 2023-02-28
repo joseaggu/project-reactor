@@ -1,5 +1,7 @@
 package com.project.reactor.transforming;
 
+import java.util.List;
+
 import com.project.reactor.utils.Mocks;
 import com.project.reactor.utils.domain.Parent;
 import org.junit.jupiter.api.Test;
@@ -18,10 +20,10 @@ class FlatMapManyTest {
   @Test
   void flatMapMany() {
     //given
-    var data = Mocks.buildParent();
+    List<Parent> data = Mocks.buildParent();
 
     //when
-    var actual = Mono.just(data)
+    Flux<String> actual = Mono.just(data)
         .flatMapMany(Flux::fromIterable).log()
         .map(Parent::getName);
 

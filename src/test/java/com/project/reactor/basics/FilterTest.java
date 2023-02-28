@@ -10,10 +10,10 @@ class FilterTest {
   @Test
   void filterFlux() {
     //given
-    var fluxMethod = Flux.fromIterable(Mocks.buildColors());
+    Flux<String> fluxMethod = Flux.fromIterable(Mocks.buildColors());
 
     //when
-    var actual = fluxMethod.filter(it -> it.length() <= 4).log();
+    Flux<String> actual = fluxMethod.filter(it -> it.length() <= 4).log();
 
     //then
     StepVerifier.create(actual)

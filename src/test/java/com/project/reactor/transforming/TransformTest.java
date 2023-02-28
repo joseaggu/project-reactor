@@ -1,5 +1,6 @@
 package com.project.reactor.transforming;
 
+import java.util.List;
 import java.util.function.Function;
 
 import com.project.reactor.utils.Mocks;
@@ -18,7 +19,7 @@ class TransformTest {
   void transform() {
     //given
 
-    var data = Mocks.buildParent();
+    List<Parent> data = Mocks.buildParent();
 
     Function<Flux<Parent>, Flux<ParentMapper>> functionTransform = it -> it.map(et -> ParentMapper.builder()
         .nameMapper(et.getName())
@@ -26,7 +27,7 @@ class TransformTest {
 
     //when
 
-    var actual = Flux.fromIterable(data)
+    Flux<String> actual = Flux.fromIterable(data)
         .transform(functionTransform)
         .map(ParentMapper::getNameMapper).log();
 

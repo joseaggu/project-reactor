@@ -1,10 +1,12 @@
 package com.project.reactor.transforming;
 
 import java.time.Duration;
+import java.util.List;
 import java.util.Random;
 
 import com.project.reactor.utils.Mocks;
 import com.project.reactor.utils.domain.Child;
+import com.project.reactor.utils.domain.Parent;
 import org.junit.jupiter.api.Test;
 import reactor.core.publisher.Flux;
 import reactor.test.StepVerifier;
@@ -17,10 +19,10 @@ class FlatMapTest {
   @Test
   void flatMapFlux() {
     //given
-    var data = Mocks.buildParent();
+    List<Parent> data = Mocks.buildParent();
 
     //when
-    var actual = Flux.fromIterable(data)
+    Flux<String> actual = Flux.fromIterable(data)
         .flatMap(t -> Flux.fromIterable(t.getNamesChildren()))
         .map(Child::getName)
         .map(String::toUpperCase)
@@ -38,10 +40,10 @@ class FlatMapTest {
   @Test
   void flatMapFluxAsync() {
     //given
-    var data = Mocks.buildParent();
+    List<Parent> data = Mocks.buildParent();
 
     //when
-    var actual = Flux.fromIterable(data)
+    Flux<String> actual = Flux.fromIterable(data)
         .flatMap(t -> Flux.fromIterable(t.getNamesChildren())
             .delayElements(Duration.ofMillis(new Random().nextInt(1000))))
         .map(Child::getName)

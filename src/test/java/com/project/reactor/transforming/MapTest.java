@@ -14,10 +14,10 @@ class MapTest {
   @Test
   void fluxMap() {
     //given
-    var fluxMethod = Flux.fromIterable(Mocks.buildColors());
+    Flux<String> fluxMethod = Flux.fromIterable(Mocks.buildColors());
 
     //when
-    var actual = fluxMethod
+    Flux<String> actual = fluxMethod
         .map(String::toUpperCase).log();
 
     //then
@@ -29,10 +29,10 @@ class MapTest {
   @Test
   void monoMap() {
     //given
-    var fluxMethod = Mono.just("red").log();
+    Mono<String> fluxMethod = Mono.just("red").log();
 
     //when
-    var actual = fluxMethod
+    Mono<String> actual = fluxMethod
         .map(String::toUpperCase);
 
     //then

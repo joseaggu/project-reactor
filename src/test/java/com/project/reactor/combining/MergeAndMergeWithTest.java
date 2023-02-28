@@ -18,12 +18,12 @@ class MergeAndMergeWithTest {
   @Test
   void merge() {
     //given
-    var dataOne = Flux.fromIterable(Mocks.buildParent()).delayElements(Duration.ofMillis(100));
-    var dataTwo = Flux.fromIterable(List.of(Parent.builder().name("Matias").build(),
+    Flux<Parent> dataOne = Flux.fromIterable(Mocks.buildParent()).delayElements(Duration.ofMillis(100));
+    Flux<Parent> dataTwo = Flux.fromIterable(List.of(Parent.builder().name("Matias").build(),
         Parent.builder().name("Rocio").build())).delayElements(Duration.ofMillis(200));
 
     //when
-    var actual = Flux.merge(dataOne, dataTwo)
+    Flux<String> actual = Flux.merge(dataOne, dataTwo)
         .map(Parent::getName)
         .map(String::toUpperCase).log();
 
@@ -36,12 +36,12 @@ class MergeAndMergeWithTest {
   @Test
   void mergeWith() {
     //given
-    var dataOne = Flux.fromIterable(Mocks.buildParent()).delayElements(Duration.ofMillis(100));
-    var dataTwo = dataOne.mergeWith(Flux.fromIterable(List.of(Parent.builder().name("Matias").build(),
+    Flux<Parent> dataOne = Flux.fromIterable(Mocks.buildParent()).delayElements(Duration.ofMillis(100));
+    Flux<Parent> dataTwo = dataOne.mergeWith(Flux.fromIterable(List.of(Parent.builder().name("Matias").build(),
         Parent.builder().name("Rocio").build())).delayElements(Duration.ofMillis(200)));
 
     //when
-    var actual = dataTwo
+    Flux<String> actual = dataTwo
         .map(Parent::getName)
         .map(String::toUpperCase).log();
 
@@ -54,11 +54,11 @@ class MergeAndMergeWithTest {
   @Test
   void mergeWithMono() {
     //given
-    var dataOne = Mono.just("A");
-    var dataTwo = dataOne.mergeWith(Mono.just("B"));
+    Mono<String> dataOne = Mono.just("A");
+    Flux<String> dataTwo = dataOne.mergeWith(Mono.just("B"));
 
     //when
-    var actual = dataTwo
+    Flux<String> actual = dataTwo
         .map(String::toUpperCase).log();
 
     //then
@@ -70,12 +70,12 @@ class MergeAndMergeWithTest {
   @Test
   void mergeSequential() {
     //given
-    var dataOne = Flux.fromIterable(Mocks.buildParent()).delayElements(Duration.ofMillis(100));
-    var dataTwo = Flux.fromIterable(List.of(Parent.builder().name("Matias").build(),
+    Flux<Parent> dataOne = Flux.fromIterable(Mocks.buildParent()).delayElements(Duration.ofMillis(100));
+    Flux<Parent> dataTwo = Flux.fromIterable(List.of(Parent.builder().name("Matias").build(),
         Parent.builder().name("Rocio").build())).delayElements(Duration.ofMillis(200));
 
     //when
-    var actual = Flux.mergeSequential(dataOne, dataTwo)
+    Flux<String> actual = Flux.mergeSequential(dataOne, dataTwo)
         .map(Parent::getName)
         .map(String::toUpperCase).log();
 

@@ -13,9 +13,9 @@ class SwitchIfEmptyTest {
   @Test
   void switchIfEmpty() {
     //when
-    final var build = Flux.fromIterable(List.of(Parent.builder().name("default").build())).map(Parent::getName);
+    final Flux<String> build = Flux.fromIterable(List.of(Parent.builder().name("default").build())).map(Parent::getName);
 
-    final var actual = Flux.fromIterable(Mocks.buildParentEmpty())
+    final Flux<String> actual = Flux.fromIterable(Mocks.buildParentEmpty())
         .map(Parent::getName)
         .switchIfEmpty(build).log();
 
@@ -28,9 +28,9 @@ class SwitchIfEmptyTest {
   @Test
   void switchIfEmptySortDifferent() {
     //when
-    final var build = Flux.fromIterable(List.of(Parent.builder().name("default").build()));
+    final Flux<Parent> build = Flux.fromIterable(List.of(Parent.builder().name("default").build()));
 
-    final var actual = Flux.fromIterable(Mocks.buildParentEmpty())
+    final Flux<String> actual = Flux.fromIterable(Mocks.buildParentEmpty())
         .switchIfEmpty(build).log()
         .map(Parent::getName);
 

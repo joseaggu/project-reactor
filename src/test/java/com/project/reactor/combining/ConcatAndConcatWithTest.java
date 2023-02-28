@@ -2,6 +2,7 @@ package com.project.reactor.combining;
 
 import com.project.reactor.utils.Mocks;
 import com.project.reactor.utils.domain.Child;
+import com.project.reactor.utils.domain.Parent;
 import org.junit.jupiter.api.Test;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -12,10 +13,10 @@ class ConcatAndConcatWithTest {
   @Test
   void concat() {
     //given
-    var dataA = Flux.fromIterable(Mocks.buildParent());
-    var dataB = Flux.fromIterable(Mocks.buildParent());
+    Flux<Parent> dataA = Flux.fromIterable(Mocks.buildParent());
+    Flux<Parent> dataB = Flux.fromIterable(Mocks.buildParent());
     //when
-    var actual = Flux.concat(dataA, dataB)
+    Flux<String> actual = Flux.concat(dataA, dataB)
         .concatMap(t -> Flux.fromIterable(t.getNamesChildren()))
         .map(Child::getName)
         .map(String::toUpperCase);
@@ -29,8 +30,8 @@ class ConcatAndConcatWithTest {
   @Test
   void concatWith() {
     //given
-    var dataA = Flux.fromIterable(Mocks.buildParent());
-    var dataB = dataA.concatWith(Flux.fromIterable(Mocks.buildParent()));
+    Flux<Parent> dataA = Flux.fromIterable(Mocks.buildParent());
+    Flux<Parent> dataB = dataA.concatWith(Flux.fromIterable(Mocks.buildParent()));
     //when
     var actual = dataB
         .concatMap(t -> Flux.fromIterable(t.getNamesChildren()))
@@ -46,10 +47,10 @@ class ConcatAndConcatWithTest {
   @Test
   void concatWithMono() {
     //given
-    var dataA = Mono.just("A");
-    var dataB = dataA.concatWith(Mono.just("B")).log();
+    Mono<String> dataA = Mono.just("A");
+    Flux<String> dataB = dataA.concatWith(Mono.just("B")).log();
     //when
-    var actual = dataB
+    Flux<String> actual = dataB
         .map(String::toUpperCase);
 
     //then

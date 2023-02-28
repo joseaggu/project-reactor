@@ -16,7 +16,7 @@ class onErrorTest {
   @Test
   void onErrorResume() {
     //when
-    var value = Flux.just("a", "b", "c")
+    Flux<String> value = Flux.just("a", "b", "c")
         .concatWith(Flux.error(new RuntimeException("error")))
         .onErrorResume(ex -> {
           log.error("Error is: {}", ex.getMessage(), ex);
@@ -32,7 +32,7 @@ class onErrorTest {
   @Test
   void onErrorReturn() {
     //when
-    var value = Flux.just("a", "b", "c")
+    Flux<String> value = Flux.just("a", "b", "c")
         .concatWith(Flux.error(new RuntimeException("error")))
         .onErrorReturn("d");
 
@@ -45,7 +45,7 @@ class onErrorTest {
   @Test
   void onErrorContinue() {
     //when
-    var value = Flux.just("a", "b", "c")
+    Flux<String> value = Flux.just("a", "b", "c")
         .map(it -> {
           if (it.equals("b")) {
             throw new IllegalStateException("State not valid");
@@ -65,7 +65,7 @@ class onErrorTest {
   @Test
   void onErrorMap() {
     //when
-    var value = Flux.just("a", "b", "c")
+    Flux<String> value = Flux.just("a", "b", "c")
         .map(it -> {
           if (it.equals("b")) {
             throw new IllegalStateException("State not valid");
@@ -86,7 +86,7 @@ class onErrorTest {
   @Test
   void doOnError() {
     //when
-    var value = Flux.just("a", "b", "c")
+    Flux<String> value = Flux.just("a", "b", "c")
         .map(it -> {
           if (it.equals("b")) {
             throw new IllegalStateException("State not valid");
