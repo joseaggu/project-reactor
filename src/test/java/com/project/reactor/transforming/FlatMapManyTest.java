@@ -32,5 +32,6 @@ class FlatMapManyTest {
         .expectNext("Alex", "Carlos")
         .verifyComplete();
   }
+
 }
 
